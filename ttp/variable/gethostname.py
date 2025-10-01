@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from re import finditer
 import logging
+from re import finditer
 
 log = logging.getLogger(__name__)
 
@@ -15,15 +15,17 @@ def gethostname(data, *args, **kwargs):
             "alu_sros": r"\n\S{1,2}:(\S+?)[>#].*(?=\n)"
         },  # e.g. 'A:hostname>', '*A:hostname>', 'A:hostname#', '*A:hostname#',
         # 'A:ALA-12>config>system#', '*A:ALA-12>config>system#'
-        # ios-xr prompt re must go before ios privilege prompt re
-        {"ios_xr": r"\n\S+:(\S+)#.*(?=\n)"},  # e.g. 'RP/0/4/CPU0:hostname#'
-        {"ios_priv": r"\n(\S+)#.*(?=\n)"},  # e.g. 'hostname#'
+        {"fortigate": r"\n(\S+ \(\S+\)) #.*(?=\n)"},  # e.g. 'forti-hostname (Default) #'
+        {"f5": r"\n\[(?:\S+@)(\S+?):.*\] ~ # .*(?=\n)"},  # e.g. '[admin@hostname:Active] ~ #'
+        {"paloalto": r"\n(?:\S+@)(\S+?)\((?:active|passive)\)> .*(?=\n)"},  # e.g. 'admin@hostname(active)>'
         {"juniper": r"\n\S*@(\S+)>.*(?=\n)"},  # e.g. 'some.user@router-fw-host>'
         {"huawei": r"\n<(\S+)>.*(?=\n)"},  # e.g. '<hostname>'
+        {"ios_xr": r"\n\S+:(\S+)#.*(?=\n)"},  # e.g. 'RP/0/4/CPU0:hostname#'
+        # ios-xr prompt re must go before ios privilege prompt re
+        # ios_priv prompt should be at the end because it matches a lot of garbage.
+        {"ios_priv": r"\n(\S+)#.*(?=\n)"},  # e.g. 'hostname#'
+        # ios_exec prompt should be the last
         {"ios_exec": r"\n(\S+)>.*(?=\n)"},  # e.g. 'hostname>'
-        {
-            "fortigate": r"\n(\S+ \(\S+\)) #.*(?=\n)"
-        },  # e.g. 'forti-hostname (Default) #'
     ]
     UTF_BOM = [
         "ï»¿",
@@ -43,9 +45,5 @@ def gethostname(data, *args, **kwargs):
             return hostname_match
         except StopIteration:
             continue
-    log.error(
-        'ttp.functions.variable_gethostname: "{}" file, Hostname not found'.format(
-            args[0]
-        )
-    )
+    log.error('ttp.functions.variable_gethostname: "{}" file, Hostname not found'.format(args[0]))
     return False
