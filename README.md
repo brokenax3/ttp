@@ -1,6 +1,7 @@
 [![Downloads](https://pepy.tech/badge/ttp)](https://pepy.tech/project/ttp)
 [![PyPI versions](https://img.shields.io/pypi/pyversions/ttp.svg)](https://pypi.python.org/pypi/ttp/)
 [![Documentation status](https://readthedocs.org/projects/ttp/badge/?version=latest)](http://ttp.readthedocs.io/?badge=latest)
+[![Tests](https://github.com/dmulyalin/ttp/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/dmulyalin/ttp/actions/workflows/main.yml)
 
 # Template Text Parser
 
@@ -183,17 +184,12 @@ parser.parse()
 
 # Contributions
 
-Feel free to submit an issue, report a bug or ask a question, feature requests are welcomed. 
+Feel free to submit an issue, report a bug or ask a question, feature requests are welcomed.
 
-Or [sponsor me or buy me a coffee](https://paypal.me/dmulyalin) :smiley: :coffee:.
+# Community Contributions
 
-# Want To Hire
+List of community resources:
 
-Reach out at [d.mulyalin@gmail.com](mailto:d.mulyalin@gmail.com?subject=[GitHub]%20TTP-Job) to discuss.
-
-# Additional resources
-
-List of additional resources:
-
-- Sandbox to test TTP templates - http://textfsm.nornir.tech/ by [tbotnz](https://github.com/tbotnz)
-- Videos on TTP - https://pynet.twb-tech.com/videos/ttp/ttp.html by [Kirk Byers](https://github.com/ktbyers)
+- [Sandbox to test TTP templates](http://textfsm.nornir.tech/) by [tbotnz](https://github.com/tbotnz)
+- [TTP Video Tutorials](https://pynet.twb-tech.com/videos/ttp/ttp.html) by [Kirk Byers](https://github.com/ktbyers)
+- [TTP Standalone editor](https://github.com/roc-ops/TTP-Editor) by [roc-ops](https://github.com/roc-ops), [Online Sandbox to test it](https://roc-ops.github.io/TTP-Editor/)

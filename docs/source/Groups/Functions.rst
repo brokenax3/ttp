@@ -35,8 +35,6 @@ Condition functions help to evaluate group results and return *False* or *True*,
      - filter results using Cerberus validation engine
    * - `void`_
      - invalidates group results, allowing to skip them
-   * - `str_to_unicode`_
-     - converts Python2 str strings in unicode strings
    * - `equal`_
      - verifies that key's value is equal to provided value
    * - `to_int`_
@@ -886,12 +884,6 @@ void
 
 The purpose of this function is to return False on group results validation, effectively allowing to skip results for this group.
 
-str_to_unicode
-------------------------------------------------------------------------------
-``str_to_unicode=""`` or ``functions="str_to_unicode"``
-
-If python2 used to run TTP, this function iterates over group results and converts strings of type ``str`` into ``unicode`` type strings. For python3 this function does nothing.
-
 equal
 ------------------------------------------------------------------------------
 ``equal="key, value"``
@@ -1026,14 +1018,14 @@ Template::
     !
     interface GigabitEthernet1/2
        switchport trunk allowed vlan 123
-    !    
+    !
     interface GigabitEthernet1/3
        switchport trunk allowed vlan foo,bar
-    !    
+    !
     interface GigabitEthernet1/4
-    ! 
+    !
     </input>
-    
+
     <group to_int="trunk_vlan, intlist=True">
     interface {{ name }}
        switchport trunk allowed vlan {{ trunk_vlan | split(',') }}
